@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 开发测试环境下的日志配置文件 -->
+<configuration debug="true" scan="false">
+    <contextName>opa</contextName>
+    <property scope="context" name="CHARSET" value="utf-8"/>
+    <property scope="context" name="appName" value="media-converter-api"/>
+    <property scope="context" name="LOG_HOME" value="./logs"/>
+    <property scope="context" name="APP_LOG_HOME" value="${LOG_HOME}/${appName}/app"/>
+    <property scope="context" name="APP_LOG_BACKUP_NAME" value="bak_app"/>
+    <property scope="context" name="APP_PATTERN" value='%d{yyyy-MM-dd HH:mm:ss}|%p|%C{16}\:%M|%L|%t|%m|%n%ex{5}'/>
+    <property scope="context" name="STDOUT_PATTERN" value='%d{HH:mm:ss}|%p|%C{16}\:%M|%L|%t|%m|%n%ex{5}%n'/>
+
+    <!-- 开发者日志文件 -->
+    <appender name="APP_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${APP_LOG_HOME}/app.${HOSTNAME}.ing</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${APP_LOG_HOME}/${APP_LOG_BACKUP_NAME}.${HOSTNAME}.%d{yyyy-MM-dd}.log.%i</fileNamePattern><!--日志文件输出的文件名 -->
+            <MaxHistory>20</MaxHistory><!--日志文件保留个数 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>30MB</maxFileSize><!-- 按时间回滚的同时，按文件大小来回滚 -->
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>${CHARSET}</charset>
+            <pattern>${APP_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>${CHARSET}</charset>
+            <pattern>${STDOUT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <if condition='property("HOSTNAME").contains("lin")'>
+        <then>
+            <!-- Bugatti开发/测试环境配置, 全部输出到本机日志文件 -->
+            <root>
+                <appender-ref ref="APP_FILE"/>
+            </root>
+        </then>
+        <else>
+            <!-- 本机自测环境配置，全部输出到控制台 -->
+            <root>
+                <appender-ref ref="STDOUT"/>
+            </root>
+        </else>
+    </if>
+
+</configuration>

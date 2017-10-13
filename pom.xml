@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qianmi</groupId>
+    <artifactId>media-converter</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>media-converter-common</module>
+        <module>media-converter-core</module>
+        <module>media-converter-server</module>
+    </modules>
+
+    <packaging>pom</packaging>
+    <name>media-converter</name>
+    <description>媒体文件转换</description>
+
+    <parent>
+        <groupId>com.qianmi</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.5.2-RELEASE</version>
+    </parent>
+
+    <properties>
+        <media-coverter.version>0.0.1-SNAPSHOT</media-coverter.version>
+        <qm.micro.service.version>1.1.7-RELEASE</qm.micro.service.version>
+        <centre-parent.version>1.0.5-RELEASE</centre-parent.version>
+        <spring-boot-starter.version>1.5.2.RELEASE</spring-boot-starter.version>
+        <lombok.version>1.16.10_qianmi-1.0.2</lombok.version>
+
+        <logback-classic.version>1.1.6</logback-classic.version>
+        <logstash.logback.encoder.version>4.7</logstash.logback.encoder.version>
+        <janino.version>2.7.8</janino.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <git.url>http://git.dev.qianmi.com/retail/media-converter.git</git.url>
+    </properties>
+
+    <scm>
+        <connection>
+            scm:git:${git.url}
+        </connection>
+        <developerConnection>
+            scm:git:${git.url}
+        </developerConnection>
+        <url>${git.url}</url>
+        <tag>media-converter-0.0.1-SNAPSHOT</tag>
+    </scm>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.qianmi</groupId>
+                <artifactId>media-converter-api</artifactId>
+                <version>${media-coverter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qianmi</groupId>
+                <artifactId>media-converter-common</artifactId>
+                <version>${media-coverter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qianmi</groupId>
+                <artifactId>media-converter-core</artifactId>
+                <version>${media-coverter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qianmi</groupId>
+                <artifactId>media-converter-server</artifactId>
+                <version>${media-coverter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qianmi</groupId>
+                <artifactId>media-converter-common</artifactId>
+                <version>${media-coverter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>1.8.9</version>
+            </dependency>
+
+            <!-- Spring Boot -->
+            <dependency>
+                <groupId>com.qianmi</groupId>
+                <artifactId>micro-service</artifactId>
+                <version>${qm.micro.service.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot-starter.version}</version>
+            </dependency>
+            <!-- Spring Boot -->
+
+            <!-- 配置注解 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${spring-boot-starter.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.5</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>
